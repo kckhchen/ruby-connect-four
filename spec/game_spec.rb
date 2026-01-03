@@ -42,10 +42,20 @@ describe Game do
     it 'prompts the player to re-input if input is invalid' do
       game = Game.new
       allow(game).to receive(:gets).and_return('8', '3')
-      allow(game).to receive(:puts)
+      allow(game).to receive(:puts).with(start_with("It's"))
       allow(game.board).to receive(:stack).with(8, '🔴').and_raise(IndexError)
       expect(game).to receive(:puts).with(include('Invalid move'))
       expect(game.board).to receive(:stack).with(3, '🔴')
+
+      game.send(:play_turn)
+    end
+
+    it 'prompts re-input if the input is empty' do
+      game = Game.new
+      allow(game).to receive(:gets).and_return('', '3')
+      allow(game).to receive(:puts).with(start_with("It's"))
+      expect(game).to receive(:puts).with(include('valid number')).once
+      expect(game.board).to receive(:stack).with(3, anything)
 
       game.send(:play_turn)
     end

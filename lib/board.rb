@@ -12,7 +12,7 @@ class Board
   end
 
   def stack(col, piece)
-    raise IndexError, 'Please input 0-6 only.' unless col.between?(0, 6)
+    raise IndexError, 'Please input 0-6 only.' unless col.between?(0, COLS - 1)
     raise IndexError, 'The column is full!' unless @grid[0][col].nil?
 
     ROWS.times do |row|

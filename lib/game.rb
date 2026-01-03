@@ -28,7 +28,12 @@ class Game
   def play_turn
     loop do
       puts "It's #{@turn}'s turn! Enter a column (0-6):"
-      placement = gets.chomp.to_i
+      placement = gets.chomp
+      unless placement.match?(/^\d$/)
+        puts 'Please enter a valid number between 0-6.'
+        next
+      end
+      placement = placement.to_i
 
       begin
         @board.stack(placement, @turn)
