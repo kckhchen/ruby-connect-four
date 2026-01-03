@@ -1,0 +1,6 @@
+# .rubocop.yml
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+    - '**/spec/**/*'
