@@ -32,6 +32,8 @@ class Board
   end
 
   def display
+    system 'clear'
+    print "\e[H\e[J"
     @grid.each do |row|
       formatted_row = row.map { |cell| cell.nil? ? '⚫' : cell }
       puts formatted_row.join(' | ')
